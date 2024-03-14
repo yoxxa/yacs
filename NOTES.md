@@ -10,3 +10,6 @@ Chat server that is:
 Communicatable via:
 - client.c
 - ncat
+
+
+
