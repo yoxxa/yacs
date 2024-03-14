@@ -32,6 +32,15 @@ int create_socket() {
 		return;
 	}
 
+	// 10 signifies num of pending connections
+	listen(sockfd, 10);
+
+	struct sockaddr_storage incoming;
+	socklen_t addr_size = sizeof(incoming);	
+	int new_sockfd;
+
+	new_sockfd = accept(sockfd, (struct sockaddr *)&incoming, &addr_size);
+
 	freeaddrinfo(serv_info);
 }
 

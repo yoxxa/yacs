@@ -12,4 +12,10 @@ Communicatable via:
 - ncat
 
 
-
+TO DO:
+- Finish off socket listen, accept, send loop
+- Segment networking sections into functions
+- Signal Handling
+- Better error handling
+- Threading
+- Daemonisation
