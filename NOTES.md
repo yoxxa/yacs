@@ -8,7 +8,7 @@ Chat server that is:
 - Threaded
 
 Communicatable via:
-- client.c
+- client.py
 - ncat
 
 

@@ -40,6 +40,10 @@ int create_socket() {
 	int new_sockfd;
 
 	new_sockfd = accept(sockfd, (struct sockaddr *)&incoming, &addr_size);
+	
+	char msg[] = "Hello client!";
+	
+	send(new_sockfd, msg, strlen(msg) + 1, 0);
 
 	freeaddrinfo(serv_info);
 }
