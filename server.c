@@ -12,7 +12,7 @@ void set_struct(struct addrinfo *hints) {
 	hints->ai_protocol = 0;
 }
 
-int create_socket_and_bind(int *sockfd, struct addrinfo *serv_info) {
+int create_socket_bind_and_listen(int *sockfd, struct addrinfo *serv_info) {
 	*sockfd = socket(serv_info->ai_family, serv_info->ai_socktype, serv_info->ai_protocol);
 
 	if (*sockfd == -1) {
@@ -24,13 +24,14 @@ int create_socket_and_bind(int *sockfd, struct addrinfo *serv_info) {
 		printf("Error with bind()");
 		return;
 	}
+
+	// 10 signifies max num of pending connections
+	listen(*sockfd, 10);
+
 	return *sockfd;
 }
 
 void handle_connection(int *sockfd) {
-
-	// 10 signifies num of pending connections
-	listen(*sockfd, 10);
 
 	struct sockaddr_storage incoming;
 	socklen_t addr_size = sizeof(incoming);	
@@ -61,7 +62,7 @@ int start_server() {
 		return;
 	}
 
-	sockfd = create_socket_and_bind(&sockfd, serv_info);
+	sockfd = create_socket_bind_and_listen(&sockfd, serv_info);
 
 	while (1) {
 		
